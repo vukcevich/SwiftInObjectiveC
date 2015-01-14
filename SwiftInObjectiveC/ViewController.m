@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "SecondViewController.h"
+
+#import "SwiftInObjectiveC-Swift.h"
 
 @interface ViewController ()
 
@@ -17,6 +20,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    // Objective-C
+    NSDictionary *dataObjects = [SwiftFile dictionaryObjects];
+    
+    NSLog(@"dbg: dataObjects: %@", dataObjects);
+    
+    //add new object --- update
+    [SwiftFile setDictionaryObjects:@"someNewID" keyValue:@"newD"];
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    
+    // get new objects
+    NSDictionary *newUpdatedObjects = [SwiftFile dictionaryObjects];
+    
+    NSString *updatedString = newUpdatedObjects[@"AnotherNewID"];
+    
+    if(updatedString == NULL) {
+       NSLog(@"First time run from null value: %@", updatedString);
+    } else {
+       NSLog(@"updated new property added (from Second Controller): %@", updatedString);
+    }
+    [super viewWillAppear:YES];
+}
+
+-(IBAction)loadSecondController:(id)sender {
+    SecondViewController *sc = [[SecondViewController alloc] init];
+    
+    [self presentViewController:sc animated:YES completion:^{}];
+    
 }
 
 - (void)didReceiveMemoryWarning {

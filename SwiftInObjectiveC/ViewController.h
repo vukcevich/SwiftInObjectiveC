@@ -10,6 +10,7 @@
 
 @interface ViewController : UIViewController
 
+-(IBAction)loadSecondController:(id)sender;
 
 @end
 
